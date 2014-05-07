@@ -2,12 +2,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * 
+ * Used to store/get all trackers being simulated by BTSim.
  * @author ningrassia
  *
  */
 public class TrackerList {
-	ArrayList<Tracker> trackers;
+	static ArrayList<Tracker> trackers;
+	static int next_tracker_id;
 	
 	/**
 	 * Creates a tracker, adds it to the list and runs it.
@@ -19,8 +20,6 @@ public class TrackerList {
 		
 		//configure the tracker
 		
-		//start the thread
-		new Thread(newTracker).start();
 	}
 	
 	/**
@@ -28,7 +27,7 @@ public class TrackerList {
 	 * @param tracker_id The tracker_id of the desired tracker.
 	 * @return The actual Tracker.
 	 */
-	public Tracker getTracker(String tracker_id) {
+	public Tracker getTracker(int tracker_id) {
 		Iterator<Tracker> trackerIter = trackers.iterator();
 		while(trackerIter.hasNext()) {
 			Tracker tempTracker = trackerIter.next();
@@ -38,5 +37,13 @@ public class TrackerList {
 		}
 		
 		return null; //if we didn't find the peer!
+	}
+	
+	/**
+	 * Returns an iterator over the tracker list
+	 * @return An Iterator over the tracker list 
+	 */
+	public Iterator<Tracker> getTrackerIter(){
+		return trackers.iterator();
 	}
 }

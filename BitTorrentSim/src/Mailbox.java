@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * 
+ * General-purpose mailbox between threads (hope this works!)
  * @author ningrassia
  *
  */
@@ -29,5 +29,9 @@ public class Mailbox {
 	 */
 	public void putMessage(String message) {
 		messages.add(message);
+	}
+	
+	public boolean hasMessage(){
+		return !messages.isEmpty();
 	}
 }
