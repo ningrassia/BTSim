@@ -75,6 +75,9 @@ static double endTime;
 			currTime += timeDelta;
 		}
 		
+		//TODO
+		//Hieu do some magic and dump out useful data from the peers!
+		
 		//quit.
 		System.exit(0);
 	}
