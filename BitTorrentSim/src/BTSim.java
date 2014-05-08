@@ -77,6 +77,7 @@ static double endTime;
 		
 		//TODO
 		//Hieu do some magic and dump out useful data from the peers!
+		//First try, learning Git Commit
 		
 		//quit.
 		System.exit(0);
