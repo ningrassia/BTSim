@@ -61,7 +61,25 @@ public class BTSimImporter {
      * 3. {@link #downSpdList}<br>
      * 4. {@link #startTimeList}<br>
      * 5. {@link #endTimeList}<br>
+     * <br>
+     * MasterList allow accessing of all fields of a particular peer with index 
+     * "index" in the following fashion. <br>
+     * <br>
+     * peerID = masterField.get(index).get(0); <br>
+     * upSpd = masterField.get(index).get(1); <br>
+     * downSpd = masterField.get(index).get(2); <br>
+     * startTime = masterField.get(index).get(3); <br>
+     * endTime = masterField.get(index).get(4); <br>
      */
+    public static List<List<?>> masterList;
+    {
+        masterList = new ArrayList<List<?>>(5);
+        masterList.add(peerIDList);
+        masterList.add(upSpdList);
+        masterList.add(downSpdList);
+        masterList.add(startTimeList);
+        masterList.add(endTimeList);
+    }
     
     //final fields to implement warning feature for potentially bad inputs
     //public static final int maxUpSpd;
@@ -149,6 +167,15 @@ public class BTSimImporter {
         if (!errorList.isEmpty()) {
             badFile = true;
         }
+        
+        if (peerIDList.size() != upSpdList.size() ||
+                upSpdList.size() != downSpdList.size() ||
+                downSpdList.size() != startTimeList.size() ||
+                startTimeList.size() != endTimeList.size()) {
+                    badFile = true;
+                    errorList.add("Something wrong with import process. The five ArrayLists "
+                            + "are not of the same size");
+        }
     }
     
     
@@ -196,12 +223,9 @@ public class BTSimImporter {
             return;
         }
         
-        peerIDList.add(Integer.parseInt(cell[0]));
-        
         int addCase = 0;
-        while (addCase != 4) {
+        while (addCase != 5) {
             int temp = 0;
-            addCase++;
             try {
                 temp = Integer.parseInt(cell[addCase]);
             } catch (Exception e) {
@@ -210,6 +234,10 @@ public class BTSimImporter {
                 temp = -1;
             }
             switch (addCase) {
+                case 0:
+                    // Column 1: peer ID
+                    peerIDList.add(temp);
+                    break;
                 case 1:
                     // Column 2: upload speed
                     upSpdList.add(temp);
@@ -229,7 +257,48 @@ public class BTSimImporter {
                 default:
                     break;
             }
+            addCase++;
         }        
+    }
+    
+    /** 
+     * @param index
+     * @return Peer ID of the peer at requested index
+     */
+    public static int getPeerID(int index) {
+        return peerIDList.get(index);
+    }
+    
+    /** 
+     * @param index
+     * @return Upload speed of the peer at requested index
+     */
+    public static int getUpSpd(int index) {
+        return upSpdList.get(index);
+    }
+    
+    /** 
+     * @param index
+     * @return Download speed of the peer at requested index
+     */
+    public static int getDownSpd(int index) {
+        return downSpdList.get(index);
+    }
+    
+    /** 
+     * @param index
+     * @return Start time of the peer at requested index
+     */
+    public static int getStartTime(int index) {
+        return startTimeList.get(index);
+    }
+    
+    /** 
+     * @param index
+     * @return End time of the peer at requested index
+     */
+    public static int getEndTime(int index) {
+        return endTimeList.get(index);
     }
     
 }
