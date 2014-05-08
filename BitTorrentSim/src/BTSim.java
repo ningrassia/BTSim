@@ -77,7 +77,30 @@ static double endTime;
 		
 		//TODO
 		//Hieu do some magic and dump out useful data from the peers!
-		//First try, learning Git Commit
+		/** 
+		 * Below I will explain my strategy to meet the requirement of the 
+		 * assignment.
+		 * 1. Resilience
+		 * - Show how long a peer tooks to recover its download rate when one 
+		 *   of the peers it was downloading from disconnect.
+		 * - Show how the leaving of a peer affect the average download speed of
+		 *   ALL peers over time (It should not affect for long).
+		 * 2. Effectiveness under peer heterogeneity
+		 * 
+		 * 3. Scalability
+		 * - Show how average download speed of all peers change in a simulation
+		 *   where more and more peers are added over time.
+		 * 
+		 * 4. Effectiveness against free-rider
+		 * - Compare average download speed of a peer with low upload speed (or 
+		 *   even 0) with that of a peer with high upload speed.
+		 * - https://www.cs.duke.edu/~msirivia/publications/large-view.pdf
+		 *   To Nik, just read the abstract...
+		 * 
+		 * 5. Fairness
+		 * - How the <avg down speed>/<avg up speed> changes with upload speed
+		 * 
+		 */
 		
 		//quit.
 		System.exit(0);
